@@ -3,3 +3,10 @@
   "version": "1.0.0",
   "main": "app.js"
 }
+
+{
+  "name": "nodejs-app1",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {}
+}
