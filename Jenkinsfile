@@ -2,27 +2,75 @@ pipeline {
     agent any
 
     environment {
-        APP_NAME = "myapp"
+        APP_NAME = "nodejs-app1"
     }
 
     stages {
 
-        stage('Clone') {
+        stage('Clone Code') {
             steps {
-                git 'https://github.com/donepriyanka99/nodejs-app1.git'
+                echo "Cloning GitHub Repository"
+
+                git branch: 'main',
+                url: 'https://github.com/donepriyanka99/nodejs-app1.git'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Workspace Check') {
             steps {
-                sh 'docker build -t myapp .'
+                echo "Checking Workspace Files"
+
+                sh 'pwd'
+                sh 'ls -la'
             }
         }
 
-        stage('Run Container') {
+        stage('Build') {
             steps {
-                sh 'docker run -d -p 3000:3000 myapp'
+                echo "Starting Build Process"
+
+                sh 'npm install'
             }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Running Application Tests"
+
+                sh 'node app.js'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo "Packaging Application"
+
+                sh 'tar -czf nodejs-app.tar.gz *'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploy Stage Started"
+
+                sh 'echo Application Deployed Successfully'
+            }
+        }
+
+    }
+
+    post {
+
+        always {
+            echo "Pipeline Execution Completed"
+        }
+
+        success {
+            echo "Pipeline Executed Successfully"
+        }
+
+        failure {
+            echo "Pipeline Failed"
         }
     }
 }
