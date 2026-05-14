@@ -1,12 +1,10 @@
 {
-  "name": "nodejs-app",
-  "version": "1.0.0",
-  "main": "app.js"
-}
-
-{
   "name": "nodejs-app1",
   "version": "1.0.0",
+  "description": "My First NodeJS Jenkins Project",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {}
 }
